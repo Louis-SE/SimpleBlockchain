@@ -6,7 +6,9 @@ Java: openjdk version "11.0.11"
 
 ## Description
 Three processes work together to verify data for a blockchain. Once all three processes are running, they each read in data from their own file and then shares the data with the other two processes. The data is transfered into an unverified block which is added into a list with the rest of the unverified blocks. The processes then begin attempting to verify data so that it can be added to the blockchain. 
+
 A processes will concatenate the block data, the previous verified block's winning hash value, and a randomly generated value. The concatinated data is hashed and the hash is checked for validity. If the hashed value meets some preset criteria (such as being divisible by 10000 for example), then the hash is considered valid, and the random value is considered one that verifies the block. The random value is stored with the verified block as a correct guess and the block has now been verified. The verified block is stored in a list the processes maintains, and then shared with the other two processes so that they can update their respective lists. All processes then proceed to carry out this process for the next unverified block.
+
 As each block is verified, it is also added to a file called BlockchainLedger.json so that when the data is done being verieid, the completed blockchain can be viewed.
 
 A part of this project also dealt with encryption. Each process generates a public and private RSA key that it shares with the other two processes. When a process verifies a block, it signs the block before sharing it so that the others can verify the signature using the shared public keys. 
